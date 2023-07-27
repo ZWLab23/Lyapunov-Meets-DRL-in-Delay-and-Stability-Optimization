@@ -29,7 +29,7 @@ class PlotConfig:
         self.weight = self.config.w.get(weight)  # 读取权重
         self.speed = self.config.rsu_compute_speed.get(speed)  # 读取RSU计算速度
         # 创建路径
-        self.main_path = parent_path + "/results/" + "/traffic/" + "/weight={},speed={}/"\
+        self.main_path = parent_path + "/results/" + "/traffic/" + "/weight={},speed={}/" \
             .format(self.weight, self.speed) + current_time
 
         # 模型保存路径
@@ -51,10 +51,14 @@ class PlotConfig:
 # ---------------------不同车辆数量下的reward对比--------------------- #
 def traffic_comparison():
     """ 不同车辆数量下的reward对比 """
-    cfg_1 = SACConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_2 = SACConfig(number_tag="number_2", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_3 = SACConfig(number_tag="number_3", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_4 = SACConfig(number_tag="number_4", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
+    cfg_1 = SACConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_2 = SACConfig(number_tag="number_2", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_3 = SACConfig(number_tag="number_3", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_4 = SACConfig(number_tag="number_4", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
     plot_cfg = PlotConfig(weight="weight_1", speed="speed_2")  # 画图参数
     sac_mind_1 = TrainAndTestSAC(cfg_1)
     sac_mind_2 = TrainAndTestSAC(cfg_2)
@@ -95,7 +99,8 @@ def traffic_comparison():
     save_queues(rsu_lengths_1, rsu_lengths_2, rsu_lengths_3, rsu_lengths_4, tag_1="train", tag_2="rsu",
                 path=plot_cfg.queue_path)
     save_ys(ys_1, ys_2, ys_3, ys_4, tag_1="train", tag_2="queue", path=plot_cfg.y_path)
-    save_ys(vehicle_ys_1, vehicle_ys_2, vehicle_ys_3, vehicle_ys_4, tag_1="train", tag_2="vehicle", path=plot_cfg.y_path)
+    save_ys(vehicle_ys_1, vehicle_ys_2, vehicle_ys_3, vehicle_ys_4, tag_1="train", tag_2="vehicle",
+            path=plot_cfg.y_path)
     save_ys(rsu_ys_1, rsu_ys_2, rsu_ys_3, rsu_ys_4, tag_1="train", tag_2="rsu", path=plot_cfg.y_path)
 
     # 画图

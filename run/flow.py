@@ -53,8 +53,10 @@ class PlotConfig:
 def flow_comparison():
     """ 不同车辆数量下的reward对比 """
     plot_cfg = PlotConfig(weight="weight_1", speed="speed_2", number="number_2")  # 画图参数
-    cfg_1 = SACConfig(number_tag="number_2", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_2 = SACConfig(number_tag="number_2", weight_tag="weight_1", speed_tag="speed_2", stability_tag="noa")
+    cfg_1 = SACConfig(number_tag="number_2", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="flow")
+    cfg_2 = SACConfig(number_tag="number_2", weight_tag="weight_1", speed_tag="speed_2", stability_tag="noa",
+                      flow_tag="flow")
     sac_mind_1 = TrainAndTestSAC(cfg_1)
     sac_mind_2 = TrainAndTestSAC(cfg_2)
 

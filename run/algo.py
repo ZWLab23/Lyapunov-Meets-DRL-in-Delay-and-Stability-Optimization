@@ -55,10 +55,14 @@ class PlotConfig:
 def algo_comparison():
     """ 不同车辆数量下的reward对比 """
     plot_cfg = PlotConfig(weight="weight_1", speed="speed_2", number="number_1")  # 画图参数
-    cfg_lq = LQConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_dqn = DQNConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_sac = SACConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
-    cfg_ddpg = DDPGConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a")
+    cfg_lq = LQConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_dqn = DQNConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                        flow_tag="nf")
+    cfg_sac = SACConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                        flow_tag="nf")
+    cfg_ddpg = DDPGConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                          flow_tag="nf")
 
     lq_mind = TrainAndTestLQ(cfg_lq)
     dqn_mind = TrainAndTestDQN(cfg_dqn)

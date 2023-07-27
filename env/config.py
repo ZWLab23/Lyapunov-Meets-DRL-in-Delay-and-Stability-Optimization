@@ -10,7 +10,7 @@ class VehicularEnvConfig:
 
         # 时间信息
         self.start_time: int = 0
-        self.end_time: int = 99
+        self.end_time: int = 299
 
         # 车辆信息
         self.vehicle_number_dict: dict = {"number_1": 4, "number_2": 6, "number_3": 8, "number_4": 10}
@@ -32,8 +32,8 @@ class VehicularEnvConfig:
 
         self.rsu_compute_speed: dict = {"speed_1": 7, "speed_2": 8, "speed_3": 9, "speed_4": 10}
 
-        self.min_rsu_init_queue_length: float = 30  # 0MB
-        self.max_rsu_init_queue_length: float = 60  # 0MB
+        self.min_rsu_init_queue_length: float = 20  # 0MB
+        self.max_rsu_init_queue_length: float = 40  # 0MB
 
         self.min_rsu_task_flow: float = 6  # 0MB
         self.max_rsu_task_flow: float = 6  # 7MB

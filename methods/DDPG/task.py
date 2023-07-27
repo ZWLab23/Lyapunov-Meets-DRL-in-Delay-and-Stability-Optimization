@@ -11,7 +11,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # 选择�
 class DDPGConfig:
     """ 算法超参数 """
 
-    def __init__(self, number_tag, weight_tag, speed_tag, stability_tag) -> None:
+    def __init__(self, number_tag, weight_tag, speed_tag, stability_tag, flow_tag) -> None:
         self.device = device
         self.algo_name = algo_name
         self.env_name = env_name
@@ -35,6 +35,7 @@ class DDPGConfig:
         self.weight_tag = weight_tag
         self.speed_tag = speed_tag
         self.stability_tag = stability_tag
+        self.flow_tag = flow_tag
 
 
 class TrainAndTestDDPG:
@@ -44,7 +45,8 @@ class TrainAndTestDDPG:
         # 创建环境和智能体
         self.cfg = cfg
         self.env = LyapunovModel(number_tag=self.cfg.number_tag, weight_tag=self.cfg.weight_tag,
-                                 speed_tag=self.cfg.speed_tag, stability_tag=self.cfg.stability_tag)
+                                 speed_tag=self.cfg.speed_tag, stability_tag=self.cfg.stability_tag,
+                                 flow_tag=self.cfg.flow_tag)
         self.env.reset()
         n_states = self.env.observation_space.shape[0]
         n_actions = self.env.action_space.shape[0]

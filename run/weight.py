@@ -52,10 +52,14 @@ class PlotConfig:
 # ---------------------不同权重下的reward对比--------------------- #
 def traffic_comparison():
     """ 不同权重下的reward对比 """
-    cfg_1 = SACConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_1", stability_tag="a")
-    cfg_2 = SACConfig(number_tag="number_1", weight_tag="weight_2", speed_tag="speed_1", stability_tag="a")
-    cfg_3 = SACConfig(number_tag="number_1", weight_tag="weight_3", speed_tag="speed_1", stability_tag="a")
-    cfg_4 = SACConfig(number_tag="number_1", weight_tag="weight_4", speed_tag="speed_1", stability_tag="a")
+    cfg_1 = SACConfig(number_tag="number_1", weight_tag="weight_1", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_2 = SACConfig(number_tag="number_1", weight_tag="weight_2", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_3 = SACConfig(number_tag="number_1", weight_tag="weight_3", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
+    cfg_4 = SACConfig(number_tag="number_1", weight_tag="weight_4", speed_tag="speed_2", stability_tag="a",
+                      flow_tag="nf")
     plot_cfg = PlotConfig(number="number_1", speed="speed_2")  # 画图参数
     sac_mind_1 = TrainAndTestSAC(cfg_1)
     sac_mind_2 = TrainAndTestSAC(cfg_2)

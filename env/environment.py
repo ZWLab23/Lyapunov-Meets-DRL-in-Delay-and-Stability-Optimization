@@ -16,6 +16,7 @@ class LyapunovModel(gym.Env):
             weight_tag: str,
             speed_tag: str,
             stability_tag: str,
+            flow_tag: str,
             env_config: Optional[VehicularEnvConfig] = None,
             time_slot: Optional[TimeSlot] = None,
             vehicle_list: Optional[VehicleList] = None,
@@ -29,6 +30,7 @@ class LyapunovModel(gym.Env):
         self.rsu_number = self.config.rsu_number
         self.vehicle_number = self.config.vehicle_number_dict.get(number_tag)
         self.stability = stability_tag
+        self.flow_tag = flow_tag
         # 车辆与RSU的初始化
         self.vehicle_list = vehicle_list or VehicleList(
             road_range=self.config.road_range,
@@ -262,14 +264,20 @@ class LyapunovModel(gym.Env):
             c_r_in: List[float],
             c_v_in: List[float],
             Q_tau_r: List[float],
-            Q_tau_v: List[float]
+            Q_tau_v: List[float],
+            Q_tau_r_: List[float],
+            Q_tau_v_: List[float]
     ):
         """ 计算reward """
         y_tau_rsu, y_tau_vehicle = self._compute_y(a_tau, b_tau, c_r_in, c_v_in, tag=self.stability)
         B_tau = self._compute_B()
         growth = self._compute_growth(y_tau_rsu, y_tau_vehicle, B_tau, Q_tau_r, Q_tau_v)
         backlog = self._compute_backlog(a_tau, b_tau, c_r_in, c_v_in, B_tau, Q_tau_r, Q_tau_v)
-        lyapunov_object = growth + self.w * delay
+        lyapunov_drift = self._Lyapunov_drift(Q_tau_r, Q_tau_r_, Q_tau_v, Q_tau_v_)
+        if self.flow_tag == "flow":
+            lyapunov_object = growth + self.w * delay
+        else:
+            lyapunov_object = lyapunov_drift + self.w * delay
         if delay > self.function.delay_threshold:
             reward = self.config.reward_threshold.get(self.weight_tag)
         else:
@@ -294,8 +302,9 @@ class LyapunovModel(gym.Env):
         delay = self._spent_time(c_r_in=c_r_in, c_r_out=c_r_out, c_v_in=c_v_in, c_v_out=c_v_out, c_c_in=c_c_in,
                                  c_c_out=c_c_out)  # 计算时间
         a_tau = self._tasklist_update()  # 保证其他任务进入
+        Q_tau_r_, Q_tau_v_ = self._get_Q_tau()  # 获取 t+1 时刻的队列长度
         reward, backlog, queue_v, y_v, queue_r, y_r, queue, y = self._reward(a_tau, b_tau, delay, c_r_in, c_v_in,
-                                                                             Q_tau_r, Q_tau_v)
+                                                                             Q_tau_r, Q_tau_v, Q_tau_r_, Q_tau_v_)
         self.vehicle_list.update()
         # 状态转移
         self.timeslot.add_time()
