@@ -30,13 +30,13 @@ class VehicularEnvConfig:
         # RSU信息
         self.rsu_number: int = 3
 
-        self.rsu_compute_speed: dict = {"speed_1": 7, "speed_2": 8, "speed_3": 9, "speed_4": 10}
+        self.rsu_compute_speed: dict = {"speed_1": 6, "speed_2": 7, "speed_3": 8, "speed_4": 9}
 
         self.min_rsu_init_queue_length: float = 20  # 0MB
         self.max_rsu_init_queue_length: float = 40  # 0MB
 
-        self.min_rsu_task_flow: float = 6  # 0MB
-        self.max_rsu_task_flow: float = 6  # 7MB
+        self.min_rsu_task_flow: float = 5  # 0MB
+        self.max_rsu_task_flow: float = 5  # 7MB
         self.rsu_task_flow: float = np.random.uniform(self.min_rsu_task_flow, self.max_rsu_task_flow)
 
         # 通讯信息
