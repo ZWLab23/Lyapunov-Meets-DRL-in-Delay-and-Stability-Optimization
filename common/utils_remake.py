@@ -51,8 +51,10 @@ def plot_rewards(*rewards, cfg, tag="train"):
     plt.figure()  # 创建一个图形实例，方便同时多画几个图
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
-    plt.xlabel('episodes', fontsize=16)
-    plt.ylabel('average rewards', fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlabel('episodes', fontsize=14)
+    plt.ylabel('average rewards', fontsize=14)
     plt.grid(True, linestyle=":", alpha=0.5)
     if cfg.info == "flow":
         for i, reward in zip(range(len(rewards)), rewards):
@@ -65,8 +67,8 @@ def plot_rewards(*rewards, cfg, tag="train"):
     else:
         for i, reward in zip(range(len(rewards)), rewards):
             plt.plot(reward, label='{}={}'.format(cfg.info, cfg.change[i]))
-    plt.legend(edgecolor="black", fontsize=16)
-    plt.ticklabel_format(style='sci', axis='both', scilimits=(5, 2))
+    plt.legend(edgecolor="black", fontsize=14)
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(5, 2))
     plt.tight_layout()
     if cfg.save:
         plt.savefig(cfg.plot_path + "{}_rewards_curve.pdf".format(tag))
@@ -77,8 +79,10 @@ def plot_backlogs(*backlogs, cfg, tag="train"):
     plt.figure()  # 创建一个图形实例，方便同时多画几个图
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
-    plt.xlabel('episodes', fontsize=16)
-    plt.ylabel('average backlog', fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlabel('episodes', fontsize=14)
+    plt.ylabel('average backlog', fontsize=14)
     plt.grid(True, linestyle="--", alpha=0.5)
     if cfg.info == "flow":
         for i, backlog in zip(range(len(backlogs)), backlogs):
@@ -91,8 +95,8 @@ def plot_backlogs(*backlogs, cfg, tag="train"):
     else:
         for i, backlog in zip(range(len(backlogs)), backlogs):
             plt.plot(backlog, label='{}={}'.format(cfg.info, cfg.change[i]))
-    plt.legend(edgecolor="black", fontsize=16)
-    plt.ticklabel_format(style='sci', axis='both', scilimits=(4, 2))
+    plt.legend(edgecolor="black", fontsize=14)
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(4, 2))
     plt.tight_layout()
     if cfg.save:
         plt.savefig(cfg.plot_path + "{}_backlogs_curve.pdf".format(tag))
@@ -103,8 +107,10 @@ def plot_delays(*delays, cfg, tag="train"):
     plt.figure()  # 创建一个图形实例，方便同时多画几个图
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
-    plt.xlabel('episodes', fontsize=16)
-    plt.ylabel('average delay', fontsize=16)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlabel('episodes', fontsize=14)
+    plt.ylabel('average delay', fontsize=14)
     plt.grid(True, linestyle="--", alpha=0.5)
     if cfg.info == "flow":
         for i, delay in zip(range(len(delays)), delays):
@@ -117,8 +123,8 @@ def plot_delays(*delays, cfg, tag="train"):
     else:
         for i, delay in zip(range(len(delays)), delays):
             plt.plot(delay, label='{}={}'.format(cfg.info, cfg.change[i]))
-    plt.legend(edgecolor="black", fontsize=16)
-    plt.ticklabel_format(style='sci', axis='both', scilimits=(3, 2))
+    plt.legend(edgecolor="black", fontsize=14)
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(3, 2))
     plt.tight_layout()
     if cfg.save:
         plt.savefig(cfg.plot_path + "{}_delays_curve.pdf".format(tag))
@@ -127,8 +133,10 @@ def plot_delays(*delays, cfg, tag="train"):
 
 def plot_completion_ratio(*completion_ratios, cfg, tag="train"):
     plt.figure()  # 创建一个图形实例，方便同时多画几个图
-    plt.xlabel('episodes', fontsize=24)
-    plt.ylabel('average task completion ratio', fontsize=20)
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.xlabel('episodes', fontsize=22)
+    plt.ylabel('average task completion ratio', fontsize=16)
     plt.grid(True, linestyle="--", alpha=0.5)
     if cfg.info == "flow":
         for i, completion_ratio in zip(range(len(completion_ratios)), completion_ratios):
@@ -142,8 +150,8 @@ def plot_completion_ratio(*completion_ratios, cfg, tag="train"):
         for i, completion_ratio in zip(range(len(completion_ratios)), completion_ratios):
             plt.plot(completion_ratio, label='{}={}'.format(cfg.info, cfg.change[i]))
     plt.legend(edgecolor="black", fontsize=16)
-    plt.tight_layout()
     plt.ticklabel_format(style='sci', axis='both', scilimits=(0, 2))
+    plt.tight_layout()
     if cfg.save:
         plt.savefig(cfg.plot_path + "{}_completion_ratio_curve.pdf".format(tag))
     plt.show()
@@ -153,13 +161,15 @@ def plot_average_queue_lengths(*average_queue_lengths, cfg, tag_1="train", tag_2
     plt.figure()  # 创建一个图形实例，方便同时多画几个图
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
-    plt.xlabel('episodes', fontsize=24)
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.xlabel('episodes', fontsize=22)
     if tag_2 == "queue":
-        plt.ylabel('Q', fontsize=24)
+        plt.ylabel('average queue length', fontsize=22)
     elif tag_2 == "vehicle":
-        plt.ylabel('$Q_v^V$', fontsize=24)
+        plt.ylabel('$Q$', fontsize=22)
     elif tag_2 == "rsu":
-        plt.ylabel('$Q_r^R$', fontsize=24)
+        plt.ylabel('$Q$', fontsize=22)
     plt.grid(True, linestyle=":", alpha=0.5)
     if cfg.info == "flow":
         for i, average_length in zip(range(len(average_queue_lengths)), average_queue_lengths):
@@ -184,27 +194,16 @@ def plot_average_y(*average_ys, cfg, tag_1="train", tag_2="y"):
     plt.figure()  # 创建一个图形实例，方便同时多画几个图
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
-    plt.xlabel('episodes', fontsize=24)
-    if tag_2 == "y":
-        plt.ylabel('y', fontsize=24)
-    elif tag_2 == "vehicle":
-        plt.ylabel('$y_v^V$', fontsize=24)
-    elif tag_2 == "rsu":
-        plt.ylabel('$y_r^R$', fontsize=24)
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.xlabel('episodes', fontsize=22)
+    plt.ylabel('$y$', fontsize=22)
     plt.grid(True, linestyle=":", alpha=0.5)
-    if cfg.info == "flow":
-        for i, average_y in zip(range(len(average_ys)), average_ys):
-            plt.plot(average_y, label='{}'.format(cfg.change[i]))
-    elif cfg.info == "algo":
-        plt.plot(average_ys[0], label='LQ')
-        plt.plot(average_ys[1], label='DQN')
-        plt.plot(average_ys[2], label='DDPG')
-        plt.plot(average_ys[3], label='Our proposal')
-    else:
-        for i, average_y in zip(range(len(average_ys)), average_ys):
-            plt.plot(average_y, label='{}={}'.format(cfg.info, cfg.change[i]))
+    average = average_ys[0]
+    x = np.arange(1000)
+    for i in range(4):
+        plt.plot(x, average[i], label='{}={}'.format(cfg.info, cfg.change[i]))
     plt.legend(edgecolor="black", fontsize=16)
-    plt.ticklabel_format(style='sci', axis='both', scilimits=(0, 2))
     plt.tight_layout()
     if cfg.save:
         plt.savefig(cfg.plot_path + "{}_average_{}_ys_v_curve.pdf".format(tag_1, tag_2))

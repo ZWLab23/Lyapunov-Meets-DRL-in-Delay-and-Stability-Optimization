@@ -123,10 +123,10 @@ class TrainAndTestSAC:
                 if rsu_queue_lengths else rsu_queue_lengths.append(average_ep_rsu_queue_length)
             queue_lengths.append(0.9 * queue_lengths[-1] + 0.1 * average_ep_queue_length) \
                 if queue_lengths else queue_lengths.append(average_ep_queue_length)
-            vehicle_ys.append(0.9 * vehicle_ys[-1] + 0.1 * average_ep_vehicle_y) \
-                if vehicle_ys else vehicle_ys.append(ep_vehicle_y)
-            rsu_ys.append(0.9 * rsu_ys[-1] + 0.1 * average_ep_rsu_y) if rsu_ys else rsu_ys.append(ep_rsu_y)
-            ys.append(0.9 * ys[-1] + 0.1 * average_ep_y) if ys else ys.append(ep_y)
+            vehicle_ys.append(0.0 * vehicle_ys[-1] + 1.0 * average_ep_vehicle_y) \
+                if vehicle_ys else vehicle_ys.append(average_ep_vehicle_y)
+            rsu_ys.append(0.9 * rsu_ys[-1] + 0.1 * average_ep_rsu_y) if rsu_ys else rsu_ys.append(average_ep_rsu_y)
+            ys.append(0.9 * ys[-1] + 0.1 * average_ep_y) if ys else ys.append(average_ep_y)
 
             if (i_ep + 1) % 1 == 0:
                 print(f"Episode:{i_ep + 1}/{self.cfg.train_eps}, Reward:{ep_reward:.3f}, "

@@ -244,8 +244,8 @@ class LyapunovModel(gym.Env):
         y_tau_rsu = [max((a_tau[i] + c_r_in[i] - b_tau[i]), 0) for i in range(self.rsu_number)]
         y_tau_vehicle = [max((a_tau[i + self.rsu_number] + c_v_in[i] - b_tau[i + self.rsu_number]), 0) for i in
                          range(self.vehicle_number)]
-        backlog_r = sum(y_tau_rsu[i] * Q_tau_r[i] for i in range(self.rsu_number)) * (1 - 1 / (self.w + 10))
-        backlog_v = sum(y_tau_vehicle[j] * Q_tau_v[j] for j in range(self.vehicle_number)) * (1 - 1 / (self.w + 10))
+        backlog_r = sum(y_tau_rsu[i] * Q_tau_r[i] for i in range(self.rsu_number))
+        backlog_v = sum(y_tau_vehicle[j] * Q_tau_v[j] for j in range(self.vehicle_number))
         backlog = backlog_r + backlog_v + B_tau
         return backlog
 

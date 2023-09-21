@@ -10,7 +10,7 @@ class VehicularEnvConfig:
 
         # 时间信息
         self.start_time: int = 0
-        self.end_time: int = 299
+        self.end_time: int = 199
 
         # 车辆信息
         self.vehicle_number_dict: dict = {"number_1": 4, "number_2": 6, "number_3": 8, "number_4": 10}
@@ -53,5 +53,5 @@ class VehicularEnvConfig:
         self.max_out_datasize: float = 0.18  # 0.18MB
 
         # 模型信息
-        self.w: dict = {"weight_1": 50, "weight_2": 100, "weight_3": 200, "weight_4": 400}
-        self.reward_threshold: dict = {"weight_1": -2500, "weight_2": -2500, "weight_3": -2500, "weight_4": -2500}
+        self.w: dict = {"weight_1": 40, "weight_2": 60, "weight_3": 80, "weight_4": 100}
+        self.reward_threshold: dict = {"weight_1": -1500, "weight_2": -1500, "weight_3": -1500, "weight_4": -1500}
