@@ -234,6 +234,7 @@ class LyapunovModel(gym.Env):
         # 计算队伍增长量部分
         growth_r = sum(y_tau_rsu[i] * Q_tau_r[i] for i in range(self.rsu_number))
         growth_v = sum(y_tau_vehicle[j] * Q_tau_v[j] for j in range(self.vehicle_number))
+        growth = growth_r + growth_v + B_tau
         return growth
 
     def _compute_backlog(
